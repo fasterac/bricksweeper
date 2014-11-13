@@ -77,17 +77,3 @@ b36 = Button(root,text='O', bg='White').grid(row=3, column=6)
 
 
 root.mainloop()
-
-
-'''
-.pack() Test
-
-#Button set
-b_exit = Button(root, text='Exit', command=root.destroy).pack(side='right')
-b_start = Button(root, text='Start').pack(side='left')
-b_reset = Button(root, text='Reset').pack(fill='x')
-
-#Label
-l_nya = Label(text='Nya nya nyaaaa').pack()
-l_nya2 = Label(text='Nyaaaaa').pack()
-'''
