@@ -1,4 +1,5 @@
 import Tkinter as tk
+from random import randrange
 
 root = tk.Tk()
 
@@ -29,7 +30,7 @@ root.title("BrickSweeper!")
 
 def sidebtn(x, y, s):
     '''change (only) bottom button state (this is test version)'''
-    print '+ (%d,%d) %d' % (x, y, s)
+    print 'Press  (%d,%d) %d' % (x, y, s)
     dct[(x, y)] = s
 
 #top zone
@@ -40,13 +41,13 @@ def sidebtn(x, y, s):
         top = Btn(x-1, y, dct[(x-1, y)])
 
         if dct[(x-1, y)] == 1:        
-            top.btn = tk.Button(width=4,height=2, text=dct[(x-1,y)], command=top.stat, \
-                    bg='White', fg='Black').grid(row=x-1, column=y)
-            print '^',top, '||',x-1, y, dct[(x-1, y)]
+            top.btn = tk.Button(root, width=4,height=2, text=dct[(x-1,y)], \
+                command=top.stat, bg='White', fg='Black').grid(row=x-1, column=y)
+            #print '^',top, '||',x-1, y, dct[(x-1, y)]
         else:
-            top.btn = tk.Button(width=4,height=2, text=dct[(x-1,y)], command=top.stat, \
-                bg='Black', fg='White').grid(row=x-1, column=y)
-            print '^',top, '||',x-1, y, dct[(x-1, y)]
+            top.btn = tk.Button(root, width=4,height=2, text=dct[(x-1,y)], \
+                command=top.stat, bg='Black', fg='White').grid(row=x-1, column=y)
+            #print '^',top, '||',x-1, y, dct[(x-1, y)]
 
 #right zone
     if y + 1 == 7:
@@ -56,13 +57,13 @@ def sidebtn(x, y, s):
         rgh = Btn(x, y+1, dct[(x, y+1)])
 
         if dct[(x, y+1)] == 1:        
-            rgh.btn = tk.Button(width=4,height=2, text=dct[(x, y+1)], command=rgh.stat, \
-                    bg='White', fg='Black').grid(row=x, column=y+1)
-            print '>',rgh, '||',x, y+1, dct[(x, y+1)]
+            rgh.btn = tk.Button(root, width=4,height=2, text=dct[(x, y+1)], \
+                command=rgh.stat, bg='White', fg='Black').grid(row=x, column=y+1)
+            #print '>',rgh, '||',x, y+1, dct[(x, y+1)]
         else:
-            rgh.btn = tk.Button(width=4,height=2, text=dct[(x, y+1)], command=rgh.stat, \
-                bg='Black', fg='White').grid(row=x, column=y+1)
-            print '>',rgh, '||',x, y+1, dct[(x, y+1)]
+            rgh.btn = tk.Button(root, width=4,height=2, text=dct[(x, y+1)], \
+                command=rgh.stat, bg='Black', fg='White').grid(row=x, column=y+1)
+            #print '>',rgh, '||',x, y+1, dct[(x, y+1)]
 
 #bottom zone yeye
     if x + 1 == 7:
@@ -72,13 +73,13 @@ def sidebtn(x, y, s):
         tom = Btn(x+1, y, dct[(x+1, y)])
 
         if dct[(x+1, y)] == 1:        
-            tom.btn = tk.Button(width=4,height=2, text=dct[(x+1,y)], command=tom.stat, \
-                    bg='White', fg='Black').grid(row=x+1, column=y)
-            print 'v',tom, '||',x+1, y, dct[(x+1, y)]
+            tom.btn = tk.Button(root, width=4,height=2, text=dct[(x+1,y)], \
+                command=tom.stat, bg='White', fg='Black').grid(row=x+1, column=y)
+            #print 'v',tom, '||',x+1, y, dct[(x+1, y)]
         else:
-            tom.btn = tk.Button(width=4,height=2, text=dct[(x+1,y)], command=tom.stat, \
-                bg='Black', fg='White').grid(row=x+1, column=y)
-            print 'v',tom, '||',x+1, y, dct[(x+1, y)]
+            tom.btn = tk.Button(root, width=4,height=2, text=dct[(x+1,y)], \
+                command=tom.stat, bg='Black', fg='White').grid(row=x+1, column=y)
+            #print 'v',tom, '||',x+1, y, dct[(x+1, y)]
 
 #left zone
     if y - 1 == 0:
@@ -88,13 +89,14 @@ def sidebtn(x, y, s):
         lft = Btn(x, y-1, dct[(x, y-1)])
 
         if dct[(x, y-1)] == 1:        
-            lft.btn = tk.Button(width=4,height=2, text=dct[(x, y-1)], command=lft.stat, \
-                    bg='White', fg='Black').grid(row=x, column=y-1)
-            print '<',lft, '||',x, y-1, dct[(x, y-1)]
+            lft.btn = tk.Button(root, width=4,height=2, text=dct[(x, y-1)], \
+                command=lft.stat, bg='White', fg='Black').grid(row=x, column=y-1)
+            #print '<',lft, '||',x, y-1, dct[(x, y-1)]
         else:
-            lft.btn = tk.Button(width=4,height=2, text=dct[(x, y-1)], command=lft.stat, \
-                bg='Black', fg='White').grid(row=x, column=y-1)
-            print '<',lft, '||',x, y-1, dct[(x, y-1)]
+            lft.btn = tk.Button(root, width=4,height=2, text=dct[(x, y-1)], \
+                command=lft.stat, bg='Black', fg='White').grid(row=x, column=y-1)
+            #print '<',lft, '||',x, y-1, dct[(x, y-1)]
+
 
 
 
@@ -103,6 +105,8 @@ top = Btn(1, 2)
 rgh = Btn(2, 3)
 tom = Btn(3, 2)
 lft = Btn(2, 1)
+tmp = Btn(2, 2)
+
 
 
 #dict for save state
@@ -113,6 +117,38 @@ for i in range(1, 7):
     for j in range(1, 7):
         a = Btn(i, j)
         dct[(i, j)] = 0
+
+
+
+
+
+
+
+
+#Random path =_+
+def ranton():
+    '''random any button 1 time'''
+    aaa = randrange(1,7)
+    bbb = randrange(1,7)
+    print '\nRandom at (%d, %d)\n' % (aaa, bbb)
+    dct[(aaa, bbb)] = dct[(aaa, bbb)] ^ 1
+    tmp = Btn(aaa, bbb, dct[(aaa, bbb)])
+    if dct[(aaa, bbb)] == 0:
+        tmp.btn = tk.Button(root, width=4,height=2, text=tmp.state, \
+            command=tmp.stat, bg='Black', fg='White').grid(row=aaa, column=bbb)
+    else:
+        tmp.btn = tk.Button(root, width=4,height=2, text=tmp.state, \
+            command=tmp.stat, bg='White', fg='Black').grid(row=aaa, column=bbb)  
+    sidebtn(aaa, bbb, dct[(aaa, bbb)])
+
+randombutton = tk.Button(root, width=10,height=2, text='Random', command=ranton,\
+    bg='Yellow', fg='Black').grid(row=6, column=7)
+
+
+
+
+
+
 
 
 
@@ -129,6 +165,12 @@ checkstatebutton = tk.Button(width=10,height=2, text='CheckState', command=pntdc
             bg='DarkGreen', fg='White').grid(row=7, column=7)
 
 
+
+
+
+
+
+
 #reset!!!!! to 0
 def resetaction():
     for i in range(1, 7):
@@ -136,8 +178,23 @@ def resetaction():
             a = Btn(i, j)
             dct[(i, j)] = 0
 resetbutton = tk.Button(width=10,height=2, text='Reset!', command=resetaction, \
-            bg='DarkRed', fg='Black').grid(row=6, column=7)    
+            bg='Red', fg='Black').grid(row=4, column=7)
 
 
+
+
+
+
+
+
+
+def shuff():
+    for i in range(5):
+        print 'randoming',i
+        ranton()
+
+
+shuffelbutton = tk.Button(width=10,height=2, text='Shuffel!', command=shuff, \
+            bg='Orange', fg='Black').grid(row=5, column=7)
 
 root.mainloop()
