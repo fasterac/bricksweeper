@@ -4,14 +4,21 @@ from random import randrange
 root = tk.Tk()
 
 
+
 def swit(b, x, y, s):
+    '''function for change button 
+    get button name(inst, obj), pikat x(int, Btn.x), pikat y(int, Btn,y),
+    state(int, dct[(x, y)]) -> 
+    This func don't change state'''
     b = Btn(x, y, s)
-    if s == 1:
+    if b.state == 1:
         b.btn = tk.Button(root, width=4,height=2, text=b.state, \
             command=b.stat, bg='White', fg='Black').grid(row=b.x, column=b.y)
     else:
         b.btn = tk.Button(root, width=4,height=2, text=b.state, \
             command=b.stat, bg='Black', fg='White').grid(row=b.x, column=b.y)
+
+
 
 
 
@@ -31,12 +38,13 @@ class Btn(object):
         sidebtn(self.x, self.y, self.state)
         print 'Press  (%d,%d) %d' % (self.x, self.y, self.state)
         dct[(self.x, self.y)] = self.state
-        if self.state == 1:
+        swit(self.btn, self.x, self.y, self.state)
+        '''if self.state == 1:
             self.btn = tk.Button(root, width=4,height=2, text=self.state, \
                 command=self.stat, bg='White', fg='Black').grid(row=self.x, column=self.y)
         else:
             self.btn = tk.Button(root, width=4,height=2, text=self.state, \
-                command=self.stat, bg='Black', fg='White').grid(row=self.x, column=self.y)
+                command=self.stat, bg='Black', fg='White').grid(row=self.x, column=self.y)'''
 
 root.title("BrickSweeper!")
 
@@ -48,7 +56,8 @@ def sidebtn(x, y, s):
         pass
     else:
         dct[(x-1, y)] = dct[(x-1, y)] ^ 1
-        top = Btn(x-1, y, dct[(x-1, y)])
+        swit(top, x-1, y, dct[(x-1, y)])
+        '''top = Btn(x-1, y, dct[(x-1, y)])
 
         if dct[(x-1, y)] == 1:        
             top.btn = tk.Button(root, width=4,height=2, text=dct[(x-1,y)], \
@@ -56,7 +65,7 @@ def sidebtn(x, y, s):
             #print '^',top, '||',x-1, y, dct[(x-1, y)]
         else:
             top.btn = tk.Button(root, width=4,height=2, text=dct[(x-1,y)], \
-                command=top.stat, bg='Black', fg='White').grid(row=x-1, column=y)
+                command=top.stat, bg='Black', fg='White').grid(row=x-1, column=y)'''
             #print '^',top, '||',x-1, y, dct[(x-1, y)]
 
 #right zone
@@ -64,7 +73,8 @@ def sidebtn(x, y, s):
         pass
     else:
         dct[(x, y+1)] = dct[(x, y+1)] ^ 1
-        rgh = Btn(x, y+1, dct[(x, y+1)])
+        swit(rgh, x, y+1, dct[(x, y+1)])
+        '''rgh = Btn(x, y+1, dct[(x, y+1)])
 
         if dct[(x, y+1)] == 1:        
             rgh.btn = tk.Button(root, width=4,height=2, text=dct[(x, y+1)], \
@@ -72,7 +82,7 @@ def sidebtn(x, y, s):
             #print '>',rgh, '||',x, y+1, dct[(x, y+1)]
         else:
             rgh.btn = tk.Button(root, width=4,height=2, text=dct[(x, y+1)], \
-                command=rgh.stat, bg='Black', fg='White').grid(row=x, column=y+1)
+                command=rgh.stat, bg='Black', fg='White').grid(row=x, column=y+1)'''
             #print '>',rgh, '||',x, y+1, dct[(x, y+1)]
 
 #bottom zone yeye
@@ -80,7 +90,8 @@ def sidebtn(x, y, s):
         pass
     else:
         dct[(x+1, y)] = dct[(x+1, y)] ^ 1
-        tom = Btn(x+1, y, dct[(x+1, y)])
+        swit(tom, x+1, y, dct[(x+1, y)])
+        '''tom = Btn(x+1, y, dct[(x+1, y)])
 
         if dct[(x+1, y)] == 1:        
             tom.btn = tk.Button(root, width=4,height=2, text=dct[(x+1,y)], \
@@ -88,7 +99,7 @@ def sidebtn(x, y, s):
             #print 'v',tom, '||',x+1, y, dct[(x+1, y)]
         else:
             tom.btn = tk.Button(root, width=4,height=2, text=dct[(x+1,y)], \
-                command=tom.stat, bg='Black', fg='White').grid(row=x+1, column=y)
+                command=tom.stat, bg='Black', fg='White').grid(row=x+1, column=y)'''
             #print 'v',tom, '||',x+1, y, dct[(x+1, y)]
 
 #left zone
@@ -96,7 +107,8 @@ def sidebtn(x, y, s):
         pass
     else:
         dct[(x, y-1)] = dct[(x, y-1)] ^ 1
-        lft = Btn(x, y-1, dct[(x, y-1)])
+        swit(lft, x, y-1, dct[(x, y-1)])
+        '''lft = Btn(x, y-1, dct[(x, y-1)])
 
         if dct[(x, y-1)] == 1:        
             lft.btn = tk.Button(root, width=4,height=2, text=dct[(x, y-1)], \
@@ -104,7 +116,7 @@ def sidebtn(x, y, s):
             #print '<',lft, '||',x, y-1, dct[(x, y-1)]
         else:
             lft.btn = tk.Button(root, width=4,height=2, text=dct[(x, y-1)], \
-                command=lft.stat, bg='Black', fg='White').grid(row=x, column=y-1)
+                command=lft.stat, bg='Black', fg='White').grid(row=x, column=y-1)'''
             #print '<',lft, '||',x, y-1, dct[(x, y-1)]
 
 
@@ -134,20 +146,15 @@ for i in range(1, 7):
 
 
 
-def bug():
-    '''reprint button from dict'''
+def debug():
+    '''reprint button from dict ....mai bug leaw'''
+    print 'de"BUG"ging.. (reprint)'
     for t in range(1, 7):
         for r in range(1, 7):
-            tmp = Btn(t, r)
-            if dct[(t, r)] == 1:        
-                tmp.btn = tk.Button(root, width=4,height=2, text=dct[(t, r)], \
-                    command=tmp.stat, bg='White', fg='Black').grid(row=t, column=r)
-            else:
-                tmp.btn = tk.Button(root, width=4,height=2, text=dct[(t, r)], \
-                    command=tmp.stat, bg='Black', fg='White').grid(row=t, column=r)
+            swit(tmp, t, r, dct[(t, r)])
 
-bugbutton = tk.Button(root, width=10,height=2, text='Bug', command=bug,\
-    bg='Purple', fg='Black').grid(row=1, column=7)
+debugbutton = tk.Button(root, width=4,height=1, text='De\n"BUG"', command=debug,\
+    bg='Purple', fg='Black').grid(row=8, column=1)
 
 
 
@@ -216,11 +223,6 @@ resetbutton = tk.Button(width=10,height=2, text='Reset!', command=resetaction, \
 
 
 
-
-
-
-
-
 def shuff():
     for i in range(5):
         print 'randoming',i ,
@@ -229,5 +231,45 @@ def shuff():
 
 shuffelbutton = tk.Button(width=10,height=2, text='Shuffel!', command=shuff, \
             bg='Orange', fg='Black').grid(row=5, column=7)
+
+
+
+
+
+
+
+
+
+
+
+def ose():
+    '''close windows ...pid nannnn muakkkk'''
+    print 'Closing Game Please Wait......\n\
+    >>>  If you press too many times. It may take several minutes.  <<<'
+    
+    denk = tk.Tk()
+    text = tk.Label(denk, text='Closing Game Please Wait......').pack()
+
+    root.destroy()
+    denk.destroy()
+    denk.mainloop()
+    
+
+closebutton = tk.Button(root, width=10,height=2, text='Close! (X)', command=ose, \
+            bg='DarkRed', fg='Black').grid(row=1, column=7)
+
+
+
+def setbut():
+    '''unavalible now'''
+    top = Btn(1, 2)
+    rgh = Btn(2, 3)
+    tom = Btn(3, 2)
+    lft = Btn(2, 1)
+    tmp = Btn(2, 2)
+setbutton = tk.Button(root, width=4,height=1, text='Set', command=setbut, \
+            bg='LightBlue', fg='Black').grid(row=8, column=2)
+
+
 
 root.mainloop()
