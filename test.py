@@ -1,80 +1,69 @@
-'''import Tkinter as tk
-root = tk.Tk()
-root.title("Test")
-
-def varue():
-    print var.get()
-
-def gth():
-    print '...'
-    print var.get()
-
-var = tk.IntVar()
-
-group1 = tk.LabelFrame(root, text="Group1", padx=5, pady=5, )
-group1.grid(row=0, column=0)
-
-bbb = tk.Button(root, width=4,height=2, command = gth()).grid(row=1, column=2)
-ccc = tk.Checkbutton(root, text="Expand").grid(row=1, column=3)
-ddd = tk.Label(root, text = 'Value =' + str(var.get())).grid(row=1, column=4)
-
-
-group2 = tk.LabelFrame(root, text="goup 2", padx=5, pady=5, )
-group2.grid(row=10, column=0)
-
-aaa = tk.Scale(root,variable = var, sliderlength = 250/9 + 10, length = 250,\
- orient='horizontal', from_ = 1, to = 10, command = varue()).grid(row=1, column=5)
-
-
-root.mainloop()'''
-
 import Tkinter as tk
 
 
 def sclget(waaa):
     '''get scale and make it global'''
     waa = waaa
+    waa = int(waa)
     global waa
 
-def togame():
+
+
+def gamein():
+    '''main game interface'''
     gme = tk.Tk()
 
     global gme
     gme.title("gme")
-    botn = tk.Button(gme,width=4,height=2, command = main1).grid(row=3, column=0)
+    print waa
 
-def main1():
+    for i in range(1, waa + 1):
+        for j in range(1, waa + 1):
+            tmp = tk.Button(gme, width=4,height=2).grid(row=i, column=j)
+
+
+    botn = tk.Button(gme,width=9,height=2,  text = 'Back', \
+        command = tomain).grid(row=13, columnspan = 3, sticky = 'e')
+
+
+
+
+def tomain():
+    '''command Back to main m3nu'''
     print waa
     gme.destroy()
     main()
 
-def mian():
-    togame()
+def togame():
+    '''command Change to game'''
+    gamein()
     root.destroy()
 
 
+
 def main():
+    '''main m3nu interface'''
     root = tk.Tk()
     global root
     root.title("rooooooot")
     sca = tk.Scale(root, sliderlength = 250/9 + 10, length = 250,\
- orient='horizontal', from_ = 1, to = 10, command = sclget)
+ orient='horizontal', from_ = 3, to = 10, command = sclget)
     sca.grid(row=1, column=0)
     sca.set(waa)
 
-    bot = tk.Button(root, text = 'Start', command = mian).grid(row=3, column=0)
+    bot = tk.Button(root, width=10,height=2, text='Start', command=togame).grid(row=3, column=0)
 
 
 
 root = tk.Tk()
-
-root.title("root")
+global root
+root.title("rooooooot")
 sca = tk.Scale(root, sliderlength = 250/9 + 10, length = 250,\
- orient='horizontal', from_ = 1, to = 10, command = sclget)
+ orient='horizontal', from_ = 3, to = 10, command = sclget)
 sca.grid(row=1, column=0)
 
+bot = tk.Button(root, width=10,height=2, text='Start', command=togame).grid(row=3, column=0)
 
-bot = tk.Button(root, text = 'Start', command = mian).grid(row=3, column=0)
 
 
 #group = tk.LabelFrame(root, text="Example", padx=5, pady=5)
