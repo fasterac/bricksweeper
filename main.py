@@ -2,6 +2,7 @@
 import Tkinter as tk
 
 
+<<<<<<< HEAD
 def swit(m, b, x, y, s):
     '''function for change each button 
     get button name(inst, obj), pikat x(int, Btn.x), pikat y(int, Btn,y),
@@ -145,7 +146,45 @@ def gamein():
     backbutton = tk.Button(gme,width=9,height=2,  text = 'Back', \
         command = tomain).grid(row=13, columnspan = 3, sticky = 'e')
 
+=======
+def sclget(waaa):
+    '''get scale and make it global'''
+    waa = waaa
+    waa = int(waa)
+    global waa
 
+
+
+def gamein():
+    '''main game interface'''
+    gme = tk.Tk()
+
+    global gme
+    gme.title("gme")
+    print waa
+
+    for i in range(1, waa + 1):
+        for j in range(1, waa + 1):
+            tmp = tk.Button(gme, width=4,height=2).grid(row=i, column=j)
+
+
+    botn = tk.Button(gme,width=9,height=2,  text = 'Back', \
+        command = tomain).grid(row=13, columnspan = 3, sticky = 'e')
+
+
+
+
+def tomain():
+    '''command Back to main m3nu'''
+    print waa
+    gme.destroy()
+    main()
+>>>>>>> 15a208ea3bb9547c20f951c145617b41817fc2d6
+
+def togame():
+    '''command Change to game'''
+    gamein()
+    root.destroy()
 
 def main():
     '''main m3nu interface'''
@@ -156,12 +195,26 @@ def main():
     group = tk.LabelFrame(root, text="Option", padx=5, pady=5)
     group.grid(row=0, column=0)
 
+<<<<<<< HEAD
     zsca = tk.Scale(group, sliderlength = 250/9 + 10, length = 250,\
  orient='horizontal', from_ = 3, to = 10, command = szeget, label = 'SquareSize')
     zsca.grid(row=1, columnspan = 20)
     zsca.set(sze)
 
     startbutton = tk.Button(root, width=10,height=2, text='Start Game', bg='green', command=togame).grid(row=3, column=0)
+=======
+def main():
+    '''main m3nu interface'''
+    root = tk.Tk()
+    global root
+    root.title("rooooooot")
+    sca = tk.Scale(root, sliderlength = 250/9 + 10, length = 250,\
+ orient='horizontal', from_ = 3, to = 10, command = sclget)
+    sca.grid(row=1, column=0)
+    sca.set(waa)
+
+    bot = tk.Button(root, width=10,height=2, text='Start', command=togame).grid(row=3, column=0)
+>>>>>>> 15a208ea3bb9547c20f951c145617b41817fc2d6
 
     particebutton = tk.Button(root, width=10,height=2, text='Pratice Mode', bg='orange', command=pracin).grid(row=4, column=0)
 
@@ -170,8 +223,21 @@ def main():
     closebutton = tk.Button(root, width=10,height=2, text='Close! (X)', command=ose, \
             bg='DarkRed', fg='Black').grid(row=5, column=0)
 
+<<<<<<< HEAD
 sze = 6
 main()
+=======
+root = tk.Tk()
+global root
+root.title("rooooooot")
+sca = tk.Scale(root, sliderlength = 250/9 + 10, length = 250,\
+ orient='horizontal', from_ = 3, to = 10, command = sclget)
+sca.grid(row=1, column=0)
+
+bot = tk.Button(root, width=10,height=2, text='Start', command=togame).grid(row=3, column=0)
+
+
+>>>>>>> 15a208ea3bb9547c20f951c145617b41817fc2d6
 
 #group = tk.LabelFrame(root, text="Example", padx=5, pady=5)
 #group.grid(row=1, column=0)
