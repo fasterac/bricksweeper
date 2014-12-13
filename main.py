@@ -1,8 +1,7 @@
 '''add Pratice mode'''
 import Tkinter as tk
+from random import randrange
 
-
-<<<<<<< HEAD
 def swit(m, b, x, y, s):
     '''function for change each button 
     get button name(inst, obj), pikat x(int, Btn.x), pikat y(int, Btn,y),
@@ -34,10 +33,10 @@ class Btn(object):
     def stat(self):
         '''when click  will go here to change state'''
         self.state = self.state ^ 1
-        sidebtn(self.mas, self.x, self.y, self.state)
         print 'Press  (%d,%d) %d' % (self.x, self.y, self.state)
         dct[(self.x, self.y)] = self.state
         swit(self.mas, self.btn, self.x, self.y, self.state)
+        sidebtn(self.mas, self.x, self.y, self.state)
 
 
 def sidebtn(m, x, y, s):
@@ -71,6 +70,42 @@ def sidebtn(m, x, y, s):
         dct[(x, y-1)] = dct[(x, y-1)] ^ 1
         swit(m, lft, x, y-1, dct[(x, y-1)])
 
+#Check Zone ----------------------
+    print 'check ~ ~ ~'
+    if 0 not in dct.values():
+        print '======1 Win======'
+    elif 1 not in dct.values():
+        print '======0 Win======'
+    else:
+        for q in range(1, sze+1):
+            print ''
+            for w in range(1, sze+1):
+                print dct[(q, w)],
+        print '\n'
+
+
+
+
+def resetaction():
+    '''action reset all button to 0'''
+    for i in range(1, sze+1):
+        for j in range(1, sze+1):
+            a = Btn(prc, i, j)
+            dct[(i, j)] = 0
+    print 'Reset!'
+
+
+def rantonaction():
+    '''random one button at pratice mode'''
+    aaa = randrange(1,sze+1)
+    bbb = randrange(1,sze+1)
+    print 'at (%d, %d)' % (aaa, bbb)
+    dct[(aaa, bbb)] = dct[(aaa, bbb)] ^ 1
+    tmp = Btn(prc, aaa, bbb, dct[(aaa, bbb)])
+    swit(prc, tmp, aaa, bbb, dct[(aaa, bbb)]) 
+    sidebtn(prc, aaa, bbb, dct[(aaa, bbb)])
+
+
 
 
 #dict for save state
@@ -91,14 +126,22 @@ def szeget(szea):
     sze = int(sze)
     global sze
 
+def domget(dda):
+    '''get random times and make it global'''
+    dom = dda
+    dom = int(dom)
+    global dom
+
 
 def tomain():
     '''command Back to main m3nu'''
+    dct = {}
     gme.destroy()
     main()
 
 def tomain2():
     '''command Back to main m3nu'''
+    dct = {}
     prc.destroy()
     main()
 
@@ -125,33 +168,16 @@ def pracin():
         for j in range(1, sze + 1):
             tmp = Btn(prc, i, j)
             dct[(i, j)] = 0
-    backbutton = tk.Button(prc, width=9,height=2,  text = 'Back', \
-        command = tomain2).grid(row=13, columnspan = 3, sticky = 'e')
+    backbutton = tk.Button(prc, width=8,height=2,  text ='(<) Back', \
+        command = tomain2, bg='pink').grid(row=13, column = 1, columnspan = 2, sticky = 'w')
+
+    resetbutton = tk.Button(prc, width=9,height=2, text='Reset!', command=resetaction, \
+            bg='yellow', fg='Black').grid(row=1,column = 13)
+
+    randombutton = tk.Button(prc, width=9,height=2, text='Random(1)', command = rantonaction, \
+            bg='lightblue', fg='Black').grid(row=2 ,column = 13)
 
 
-
-def gamein():
-    '''main game interface'''
-    gme = tk.Tk()
-
-    global gme
-    gme.title("gme")
-    print sze
-
-    for i in range(1, sze + 1):
-        for j in range(1, sze + 1):
-            tmp = tk.Button(gme, width=4,height=2).grid(row=i, column=j)
-
-
-    backbutton = tk.Button(gme,width=9,height=2,  text = 'Back', \
-        command = tomain).grid(row=13, columnspan = 3, sticky = 'e')
-
-=======
-def sclget(waaa):
-    '''get scale and make it global'''
-    waa = waaa
-    waa = int(waa)
-    global waa
 
 
 
@@ -161,83 +187,65 @@ def gamein():
 
     global gme
     gme.title("gme")
-    print waa
+    for v in range(1, sze + 1):
+        for b in range(1, sze + 1):
+            tmp = Btn(gme, v, b)
 
-    for i in range(1, waa + 1):
-        for j in range(1, waa + 1):
-            tmp = tk.Button(gme, width=4,height=2).grid(row=i, column=j)
+    for k in xrange(1,sze+1):
+        for l in xrange(1,sze+1):
+            dct[(k, l)] = 0
+
+    for _ in xrange(dom):
+        aaa = randrange(1, sze+1)
+        bbb = randrange(1, sze+1)
+        print 'at (%d, %d)' % (aaa, bbb)
+        dct[(aaa, bbb)] = dct[(aaa, bbb)] ^ 1
+        tmp = Btn(gme, aaa, bbb, dct[(aaa, bbb)])
+        swit(gme, tmp, aaa, bbb, dct[(aaa, bbb)]) 
+        sidebtn(gme, aaa, bbb, dct[(aaa, bbb)])
+
+    print 'Randomed for %d round' % (dom)
+
+    backbutton = tk.Button(gme, width=8,height=2,  text ='(<) Back', \
+        command = tomain, bg='pink').grid(row=13, column = 1, columnspan = 2, sticky = 'w')
 
 
-    botn = tk.Button(gme,width=9,height=2,  text = 'Back', \
-        command = tomain).grid(row=13, columnspan = 3, sticky = 'e')
 
-
-
-
-def tomain():
-    '''command Back to main m3nu'''
-    print waa
-    gme.destroy()
-    main()
->>>>>>> 15a208ea3bb9547c20f951c145617b41817fc2d6
-
-def togame():
-    '''command Change to game'''
-    gamein()
-    root.destroy()
 
 def main():
     '''main m3nu interface'''
     root = tk.Tk()
     global root
     root.title("rooooooot")
+
+    
 
     group = tk.LabelFrame(root, text="Option", padx=5, pady=5)
-    group.grid(row=0, column=0)
+    group.grid(row=1, column=0)
 
-<<<<<<< HEAD
+    dsca = tk.Scale(group, sliderlength = 250/20+ 10, length = 250,\
+ orient='horizontal', from_ = 1, to = 50, command = domget, label = 'RandomRound')
+    dsca.grid(row=2, columnspan = 20)
+    dsca.set(dom)
+
     zsca = tk.Scale(group, sliderlength = 250/9 + 10, length = 250,\
  orient='horizontal', from_ = 3, to = 10, command = szeget, label = 'SquareSize')
-    zsca.grid(row=1, columnspan = 20)
+    zsca.grid(row=3, columnspan = 20)
     zsca.set(sze)
 
-    startbutton = tk.Button(root, width=10,height=2, text='Start Game', bg='green', command=togame).grid(row=3, column=0)
-=======
-def main():
-    '''main m3nu interface'''
-    root = tk.Tk()
-    global root
-    root.title("rooooooot")
-    sca = tk.Scale(root, sliderlength = 250/9 + 10, length = 250,\
- orient='horizontal', from_ = 3, to = 10, command = sclget)
-    sca.grid(row=1, column=0)
-    sca.set(waa)
+    startbutton = tk.Button(root, width=10,height=2, text='Start Game', bg='green', command=togame).grid(row=4, column=0)
 
-    bot = tk.Button(root, width=10,height=2, text='Start', command=togame).grid(row=3, column=0)
->>>>>>> 15a208ea3bb9547c20f951c145617b41817fc2d6
-
-    particebutton = tk.Button(root, width=10,height=2, text='Pratice Mode', bg='orange', command=pracin).grid(row=4, column=0)
+    particebutton = tk.Button(root, width=10,height=2, text='Pratice Mode', bg='orange', command=pracin).grid(row=5, column=0)
+    
 
     def ose():
         root.destroy()    
     closebutton = tk.Button(root, width=10,height=2, text='Close! (X)', command=ose, \
-            bg='DarkRed', fg='Black').grid(row=5, column=0)
+            bg='DarkRed', fg='Black').grid(row=6, column=0)
 
-<<<<<<< HEAD
 sze = 6
+dom = 5
 main()
-=======
-root = tk.Tk()
-global root
-root.title("rooooooot")
-sca = tk.Scale(root, sliderlength = 250/9 + 10, length = 250,\
- orient='horizontal', from_ = 3, to = 10, command = sclget)
-sca.grid(row=1, column=0)
-
-bot = tk.Button(root, width=10,height=2, text='Start', command=togame).grid(row=3, column=0)
-
-
->>>>>>> 15a208ea3bb9547c20f951c145617b41817fc2d6
 
 #group = tk.LabelFrame(root, text="Example", padx=5, pady=5)
 #group.grid(row=1, column=0)
