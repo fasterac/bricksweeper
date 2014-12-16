@@ -72,16 +72,16 @@ def sidebtn(m, x, y, s):
 
 #Check Zone ----------------------
     print 'check ~ ~ ~'
-    if 0 not in dct.values():
+    chcklst = []
+    for f in range(1, sze+1):
+        for g in range(1, sze+1):
+            chcklst.append(dct[(f, g)])
+    if 0 not in chcklst:
         print '======1 Win======'
-    elif 1 not in dct.values():
+        winwindows(1, m)
+    elif 1 not in chcklst:
         print '======0 Win======'
-    else:
-        for q in range(1, sze+1):
-            print ''
-            for w in range(1, sze+1):
-                print dct[(q, w)],
-        print '\n'
+        winwindows(0, m)
 
 
 
@@ -134,15 +134,18 @@ def domget(dda):
 
 
 def tomain():
-    '''command Back to main m3nu'''
-    dct = {}
+    '''command from game mode Back to main m3nu'''
     gme.destroy()
     main()
 
 def tomain2():
-    '''command Back to main m3nu'''
-    dct = {}
+    '''command from practice mode Back to main m3nu'''
     prc.destroy()
+    main()
+
+def tomain3():
+    '''command from win game mode Back to main m3nu'''
+    win.destroy()
     main()
 
 def togame():
@@ -150,12 +153,27 @@ def togame():
     gamein()
     root.destroy()
 
+def repay():
+    win.destroy()
+    print 'replay'
+    togame()
+
+    
 
 
 
 
 
+def winwindows(numm, m):
+    win = tk.Tk()
+    m.destroy()
+    global win
+    show = tk.Label(win, text = '%d win' % (numm), padx = 5, pady = 5).pack(side = 'top')
 
+    backbutton = tk.Button(win, width=10,height=2,  text ='Back To Menu', \
+        command = tomain3, bg='pink').pack(side = 'left')
+    replaybutton = tk.Button(win, width=10,height=2,  text ='RePlay', \
+        command = repay, bg='LightGreen').pack(side = 'left')
 
 
 def pracin():
