@@ -71,17 +71,20 @@ def sidebtn(m, x, y, s):
         swit(m, lft, x, y-1, dct[(x, y-1)])
 
 #Check Zone ----------------------
-    print 'check ~ ~ ~'
-    chcklst = []
-    for f in range(1, sze+1):
-        for g in range(1, sze+1):
-            chcklst.append(dct[(f, g)])
-    if 0 not in chcklst:
-        print '======1 Win======'
-        winwindows(1, m)
-    elif 1 not in chcklst:
-        print '======0 Win======'
-        winwindows(0, m)
+    if checker == False:
+        pass
+    else:
+        print 'check ~ ~ ~'
+        chcklst = []
+        for f in range(1, sze+1):
+            for g in range(1, sze+1):
+                chcklst.append(dct[(f, g)])
+        if 0 not in chcklst:
+            print '======1 Win======'
+            winwindows(1, m)
+        elif 1 not in chcklst:
+            print '======0 Win======'
+            winwindows(0, m)
 
 
 
@@ -150,6 +153,8 @@ def tomain3():
 
 def togame():
     '''command Change to game'''
+    checker = True
+    global checker
     gamein()
     root.destroy()
 
@@ -168,17 +173,19 @@ def winwindows(numm, m):
     win = tk.Tk()
     m.destroy()
     global win
-    show = tk.Label(win, text = '%d win' % (numm), padx = 5, pady = 5).pack(side = 'top')
+    show = tk.Label(win, text = 'Clear All Board to %d, You Win!!!' % (numm), padx = 5, pady = 5).pack(side = 'top')
 
-    backbutton = tk.Button(win, width=10,height=2,  text ='Back To Menu', \
+    backbutton = tk.Button(win, width=12,height=2,  text ='Back To Menu', \
         command = tomain3, bg='pink').pack(side = 'left')
-    replaybutton = tk.Button(win, width=10,height=2,  text ='RePlay', \
+    replaybutton = tk.Button(win, width=12,height=2,  text ='RePlay', \
         command = repay, bg='LightGreen').pack(side = 'left')
 
 
 def pracin():
     '''pratice mode interface'''
 #create button zone ^-^
+    checker = False
+    global checker
     root.destroy()
     prc = tk.Tk()
     global prc
