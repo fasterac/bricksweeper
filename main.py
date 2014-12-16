@@ -16,9 +16,6 @@ def swit(m, b, x, y, s):
             command=b.stat, bg='Black', fg='White').grid(row=b.x, column=b.y)
 
 
-
-
-
 class Btn(object):
     def __init__(self, mas, x, y, state=0):
         self.mas = mas
@@ -74,7 +71,6 @@ def sidebtn(m, x, y, s):
     if checker == False:
         pass
     else:
-        print 'check ~ ~ ~'
         chcklst = []
         for f in range(1, sze+1):
             for g in range(1, sze+1):
@@ -109,17 +105,10 @@ def rantonaction():
     sidebtn(prc, aaa, bbb, dct[(aaa, bbb)])
 
 
-
-
 #dict for save state
 dct = {}
 
 print 'Program Starto!!!!!'
-
-
-
-
-
 
 
 
@@ -134,7 +123,6 @@ def domget(dda):
     dom = dda
     dom = int(dom)
     global dom
-
 
 def tomain():
     '''command from game mode Back to main m3nu'''
@@ -157,22 +145,18 @@ def togame():
     global checker
     gamein()
     root.destroy()
-
+   
 def repay():
     win.destroy()
     print 'replay'
-    togame()
-
-    
-
-
-
+    gamein()
 
 
 def winwindows(numm, m):
     win = tk.Tk()
     m.destroy()
     global win
+    win.title("End")
     show = tk.Label(win, text = 'Clear All Board to %d, You Win!!!' % (numm), padx = 5, pady = 5).pack(side = 'top')
 
     backbutton = tk.Button(win, width=12,height=2,  text ='Back To Menu', \
@@ -189,6 +173,7 @@ def pracin():
     root.destroy()
     prc = tk.Tk()
     global prc
+    prc.title("Pratice")
     for i in range(1, sze + 1):
         for j in range(1, sze + 1):
             tmp = Btn(prc, i, j)
@@ -203,15 +188,12 @@ def pracin():
             bg='lightblue', fg='Black').grid(row=2 ,column = 13)
 
 
-
-
-
 def gamein():
     '''main game interface'''
     gme = tk.Tk()
 
     global gme
-    gme.title("gme")
+    gme.title("Game")
     for v in range(1, sze + 1):
         for b in range(1, sze + 1):
             tmp = Btn(gme, v, b)
@@ -235,21 +217,20 @@ def gamein():
         command = tomain, bg='pink').grid(row=13, column = 1, columnspan = 2, sticky = 'w')
 
 
-
-
 def main():
     '''main m3nu interface'''
     root = tk.Tk()
     global root
-    root.title("rooooooot")
+    root.title("Bricksweeper!!")
 
+    name = tk.Label(root,text = 'BrickSweeper', font = ("Times", "24", "bold italic") )
+    name.grid(row=0, column=0)
     
-
     group = tk.LabelFrame(root, text="Option", padx=5, pady=5)
     group.grid(row=1, column=0)
 
     dsca = tk.Scale(group, sliderlength = 250/20+ 10, length = 250,\
- orient='horizontal', from_ = 1, to = 50, command = domget, label = 'RandomRound')
+ orient='horizontal', from_ = 1, to = 50, command = domget, label = 'RandiomRound')
     dsca.grid(row=2, columnspan = 20)
     dsca.set(dom)
 
@@ -261,21 +242,13 @@ def main():
     startbutton = tk.Button(root, width=10,height=2, text='Start Game', bg='green', command=togame).grid(row=4, column=0)
 
     particebutton = tk.Button(root, width=10,height=2, text='Pratice Mode', bg='orange', command=pracin).grid(row=5, column=0)
-    
 
-    def ose():
-        root.destroy()    
-    closebutton = tk.Button(root, width=10,height=2, text='Close! (X)', command=ose, \
+    closebutton = tk.Button(root, width=10,height=2, text='Close! (X)', command= root.destroy , \
             bg='DarkRed', fg='Black').grid(row=6, column=0)
 
 sze = 6
 dom = 5
 main()
-
-#group = tk.LabelFrame(root, text="Example", padx=5, pady=5)
-#group.grid(row=1, column=0)
-
-
 
 
 root.mainloop()
