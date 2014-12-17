@@ -1,4 +1,7 @@
-'''add Pratice mode'''
+'''Game BrickSweeper
+by Boontarika Pochchongdach 57070061
+   Uemporn Rakkamnoet 57070150'''
+
 import Tkinter as tk
 from random import randrange
 
@@ -39,38 +42,28 @@ class Btn(object):
 def sidebtn(m, x, y, s):
     '''change all side button state'''
 #top zone
-    if x - 1 == 0:
-        pass
-    else:
+    if x - 1 != 0:
         top = Btn(m, x - 1, y)
         dct[(x-1, y)] = dct[(x-1, y)] ^ 1
         swit(m, top, x-1, y, dct[(x-1, y)])
 #right zone
-    if y + 1 == sze+1:
-        pass
-    else:
+    if y + 1 != sze+1:
         rgh = Btn(m, x, y + 1)
         dct[(x, y+1)] = dct[(x, y+1)] ^ 1
         swit(m, rgh, x, y+1, dct[(x, y+1)])
 #bottom zone yeye
-    if x + 1 == sze+1:
-        pass
-    else:
+    if x + 1 != sze+1:
         tom = Btn(m, x+1, y)
         dct[(x+1, y)] = dct[(x+1, y)] ^ 1
         swit(m, tom, x+1, y, dct[(x+1, y)])
 #left zone
-    if y - 1 == 0:
-        pass
-    else:
+    if y - 1 != 0:
         lft = Btn(m, x, y-1)
         dct[(x, y-1)] = dct[(x, y-1)] ^ 1
         swit(m, lft, x, y-1, dct[(x, y-1)])
 
 #Check Zone ----------------------
-    if checker == False:
-        pass
-    else:
+    if checker == True:
         chcklst = []
         for f in range(1, sze+1):
             for g in range(1, sze+1):
@@ -85,6 +78,7 @@ def sidebtn(m, x, y, s):
 
 
 
+
 def resetaction():
     '''action reset all button to 0'''
     for i in range(1, sze+1):
@@ -92,7 +86,6 @@ def resetaction():
             a = Btn(prc, i, j)
             dct[(i, j)] = 0
     print 'Reset!'
-
 
 def rantonaction():
     '''random one button at pratice mode'''
@@ -107,7 +100,6 @@ def rantonaction():
 
 #dict for save state
 dct = {}
-
 print 'Program Starto!!!!!'
 
 
@@ -152,17 +144,25 @@ def repay():
     gamein()
 
 
+
 def winwindows(numm, m):
     win = tk.Tk()
     m.destroy()
     global win
     win.title("End")
-    show = tk.Label(win, text = 'Clear All Board to %d, You Win!!!' % (numm), padx = 5, pady = 5).pack(side = 'top')
+    if numm == 0:
+    	winpnt = 'Black'
+    else:
+    	winpnt = 'White'
+    show = tk.Label(win, text = 'Clear All Board to %s(%d), You Win!' % (winpnt, numm), \
+    font = ("16") , padx = 10, pady = 15).pack(side = 'top')
 
     backbutton = tk.Button(win, width=12,height=2,  text ='Back To Menu', \
-        command = tomain3, bg='pink').pack(side = 'left')
+        command = tomain3, bg='Pink').pack(side = 'left')
     replaybutton = tk.Button(win, width=12,height=2,  text ='RePlay', \
-        command = repay, bg='LightGreen').pack(side = 'left')
+        command = repay, bg='Green').pack(side = 'left')
+    closebutton = tk.Button(win, width=12,height=2, text='Close! (X)', \
+    	command= win.destroy , bg='Red', fg='Black').pack(side = 'left')
 
 
 def pracin():
@@ -230,7 +230,7 @@ def main():
     group.grid(row=1, column=0)
 
     dsca = tk.Scale(group, sliderlength = 250/20+ 10, length = 250,\
- orient='horizontal', from_ = 1, to = 50, command = domget, label = 'RandiomRound')
+ orient='horizontal', from_ = 1, to = 50, command = domget, label = 'RandomRound')
     dsca.grid(row=2, columnspan = 20)
     dsca.set(dom)
 
@@ -244,7 +244,7 @@ def main():
     particebutton = tk.Button(root, width=10,height=2, text='Pratice Mode', bg='orange', command=pracin).grid(row=5, column=0)
 
     closebutton = tk.Button(root, width=10,height=2, text='Close! (X)', command= root.destroy , \
-            bg='DarkRed', fg='Black').grid(row=6, column=0)
+            bg='Red', fg='Black').grid(row=6, column=0)
 
 sze = 6
 dom = 5
