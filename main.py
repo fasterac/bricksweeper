@@ -65,14 +65,14 @@ def sidebtn(m, x, y, s):
 #Check Zone ----------------------
     if checker == True:
         chcklst = []
-        for f in range(1, sze+1):
-            for g in range(1, sze+1):
+        for f in xrange(1, sze+1):
+            for g in xrange(1, sze+1):
                 chcklst.append(dct[(f, g)])
         if 0 not in chcklst:
-            print '======1 Win======'
+            print '======WIN, all to WHITE======'
             winwindows(1, m)
         elif 1 not in chcklst:
-            print '======0 Win======'
+            print '======WIN, all to BLACK======'
             winwindows(0, m)
 
 
@@ -81,8 +81,8 @@ def sidebtn(m, x, y, s):
 
 def resetaction():
     '''action reset all button to 0'''
-    for i in range(1, sze+1):
-        for j in range(1, sze+1):
+    for i in xrange(1, sze+1):
+        for j in xrange(1, sze+1):
             a = Btn(prc, i, j)
             dct[(i, j)] = 0
     print 'Reset!'
@@ -91,7 +91,7 @@ def rantonaction():
     '''random one button at pratice mode'''
     aaa = randrange(1,sze+1)
     bbb = randrange(1,sze+1)
-    print 'at (%d, %d)' % (aaa, bbb)
+    print 'Random at (%d, %d)' % (aaa, bbb)
     dct[(aaa, bbb)] = dct[(aaa, bbb)] ^ 1
     tmp = Btn(prc, aaa, bbb, dct[(aaa, bbb)])
     swit(prc, tmp, aaa, bbb, dct[(aaa, bbb)]) 
@@ -106,15 +106,15 @@ print 'Program Starto!!!!!'
 
 def szeget(szea):
     '''get scale and make it global'''
+    global sze
     sze = szea
     sze = int(sze)
-    global sze
 
 def domget(dda):
     '''get random times and make it global'''
+    global dom
     dom = dda
     dom = int(dom)
-    global dom
 
 def tomain():
     '''command from game mode Back to main m3nu'''
@@ -133,27 +133,32 @@ def tomain3():
 
 def togame():
     '''command Change to game'''
-    checker = True
     global checker
+    checker = True    
     gamein()
     root.destroy()
    
 def repay():
     win.destroy()
-    print 'replay'
+    print '--Replay--'
     gamein()
 
 
 
+
+
+
+
+
 def winwindows(numm, m):
-    win = tk.Tk()
-    m.destroy()
     global win
+    win = tk.Tk()
+    m.destroy()    
     win.title("End")
     if numm == 0:
-    	winpnt = 'Black'
+        winpnt = 'Black'
     else:
-    	winpnt = 'White'
+        winpnt = 'White'
     show = tk.Label(win, text = 'Clear All Board to %s(%d), You Win!' % (winpnt, numm), \
     font = ("16") , padx = 10, pady = 15).pack(side = 'top')
 
@@ -162,20 +167,20 @@ def winwindows(numm, m):
     replaybutton = tk.Button(win, width=12,height=2,  text ='RePlay', \
         command = repay, bg='Green').pack(side = 'left')
     closebutton = tk.Button(win, width=12,height=2, text='Close! (X)', \
-    	command= win.destroy , bg='Red', fg='Black').pack(side = 'left')
+        command= win.destroy , bg='Red', fg='Black').pack(side = 'left')
 
 
 def pracin():
     '''pratice mode interface'''
-#create button zone ^-^
-    checker = False
+#create button zone ^-^    
     global checker
+    checker = False
     root.destroy()
-    prc = tk.Tk()
     global prc
+    prc = tk.Tk()    
     prc.title("Pratice")
-    for i in range(1, sze + 1):
-        for j in range(1, sze + 1):
+    for i in xrange(1, sze + 1):
+        for j in xrange(1, sze + 1):
             tmp = Btn(prc, i, j)
             dct[(i, j)] = 0
     backbutton = tk.Button(prc, width=8,height=2,  text ='(<) Back', \
@@ -190,22 +195,23 @@ def pracin():
 
 def gamein():
     '''main game interface'''
-    gme = tk.Tk()
-
     global gme
+    gme = tk.Tk()
     gme.title("Game")
-    for v in range(1, sze + 1):
-        for b in range(1, sze + 1):
+    for v in xrange(1, sze + 1):
+        for b in xrange(1, sze + 1):
             tmp = Btn(gme, v, b)
 
     for k in xrange(1,sze+1):
         for l in xrange(1,sze+1):
             dct[(k, l)] = 0
+    global checker
+    checker = False
 
     for _ in xrange(dom):
         aaa = randrange(1, sze+1)
         bbb = randrange(1, sze+1)
-        print 'at (%d, %d)' % (aaa, bbb)
+        print 'Random at (%d, %d)' % (aaa, bbb)
         dct[(aaa, bbb)] = dct[(aaa, bbb)] ^ 1
         tmp = Btn(gme, aaa, bbb, dct[(aaa, bbb)])
         swit(gme, tmp, aaa, bbb, dct[(aaa, bbb)]) 
@@ -213,14 +219,17 @@ def gamein():
 
     print 'Randomed for %d round' % (dom)
 
+    checker = True
+
     backbutton = tk.Button(gme, width=8,height=2,  text ='(<) Back', \
         command = tomain, bg='pink').grid(row=13, column = 1, columnspan = 2, sticky = 'w')
 
 
 def main():
     '''main m3nu interface'''
-    root = tk.Tk()
     global root
+    root = tk.Tk()
+    
     root.title("Bricksweeper!!")
 
     name = tk.Label(root,text = 'BrickSweeper', font = ("Times", "24", "bold italic") )
